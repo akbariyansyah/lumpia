@@ -1,7 +1,7 @@
-var studentRepo = require('../repository/student.js');
+const studentRepo = require('../repository/student.js');
 
-var DetailController = function (req, res) {
-    var id = req.params.id
+const DetailController = (req, res) => {
+    const id = req.params.id
     studentRepo.Detail(connection, id, (data, err) => {
         if (err)
             res.status(500).send({
@@ -15,7 +15,7 @@ var DetailController = function (req, res) {
     });
 }
 
-const ListController = function (req, res) {
+const ListController = (req, res) => {
     studentRepo.List(connection, (data, err) => {
         if (err)
             res.status(500).send({
@@ -29,8 +29,8 @@ const ListController = function (req, res) {
     });
 }
 
-const CreateController = function (req, res) {
-    var student = req.body;
+const CreateController = (req, res) => {
+    const student = req.body;
     studentRepo.Create(connection, student, (data, err) => {
         if (err)
             res.status(500).send({
@@ -44,8 +44,8 @@ const CreateController = function (req, res) {
     });
 }
 
-const DeleteController = function (req, res) {
-    var id = req.params.id;
+const DeleteController = (req, res) => {
+    const id = req.params.id;
     studentRepo.Delete(connection, id, (data, err) => {
         if (err)
             res.status(500).send({
@@ -59,9 +59,9 @@ const DeleteController = function (req, res) {
     });
 }
 
-const UpdateController = function (req, res) {
-    var student = req.body;
-    var id = req.params.id;
+const UpdateController = (req, res) => {
+    const student = req.body;
+    const id = req.params.id;
     studentRepo.Update(connection, student, id, (data, err) => {
         if (err)
             res.status(500).send({

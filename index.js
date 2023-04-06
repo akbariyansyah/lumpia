@@ -2,8 +2,8 @@ var express = require('express');
 var configReader = require('node-yaml-config');
 var bodyParser = require('body-parser');
 var database = require('./config/database');
-var subjectRepo = require('./app/repository/subject.js');
-var studentController = require('./app/controller/student.js')
+var studentController = require('./app/controller/student.js');
+var subjectController = require('./app/controller/subject.js');
 const fs = require("fs");
 
 var config = configReader.load('config/config.yml');
@@ -65,82 +65,15 @@ app.put('/students/:id', studentController.UpdateController);
 app.delete('/students/:id', studentController.DeleteController);
 
 // Subjects . 
-app.get('/subjects', function (req, res) {
-    subjectRepo.List(connection, (data, err) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while fetching subjects" + err
-            });
-        else res.send({
-            "status": "ok",
-            "data": data
-        });
-    });
-});
+app.get('/subjects', subjectController.ListController);
 
-app.get('/subjects/:id', function (req, res) {
-    var id = req.params.id
-    subjectRepo.Detail(connection, id, (data, err) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving subject" + err
-            });
-        else res.send({
-            "status": "ok",
-            "data": data
-        });
-    });
-});
+app.get('/subjects/:id', subjectController.DetailController);
 
-app.post('/subjects', function (req, res) {
-    var student = req.body;
-    subjectRepo.Create(connection, student, (data, err) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating subject" + err
-            });
-        else res.send({
-            "status": "ok",
-            "data": data
-        });
-    });
-});
+app.post('/subjects', subjectController.CreateController);
 
-app.put('/subjects/:id', function (req, res) {
-    var subject = req.body;
-    var id = req.params.id;
-    subjectRepo.Update(connection, subject, id, (data, err) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while updating subject" + err
-            });
-        else res.send({
-            "status": "ok",
-            "data": data
-        });
-    });
+app.put('/subjects/:id', subjectController.UpdateController);
 
-});
-
-app.delete('/subjects/:id', function (req, res) {
-    var id = req.params.id;
-    subjectRepo.Delete(connection, id, (data, err) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while deleting subject" + err
-            });
-        else res.send({
-            "status": "ok",
-            "data": data
-        });
-    });
-});
-
+app.delete('/subjects/:id', subjectController.DeleteController);
 
 
 let port = config.app.port

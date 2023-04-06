@@ -1,6 +1,3 @@
-
-
-
 var List = (connection, result) => {
     var query = 'SELECT * FROM students'
     connection.query(query, function (error, rows, fields) {
