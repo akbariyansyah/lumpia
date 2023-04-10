@@ -1,7 +1,7 @@
 
-var List = (connection, result) => {
-    var query = 'SELECT * FROM subjects'
-    connection.query(query, function (error, rows, fields) {
+const List = (connection, result) => {
+    const query = 'SELECT * FROM subjects'
+    connection.query(query,  (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);
@@ -11,9 +11,9 @@ var List = (connection, result) => {
     });
 }
 
-var Detail = (connection, id, result) => {
-    var query = 'SELECT * FROM subjects WHERE id = ?'
-    connection.query(query, id, function (error, rows, fields) {
+const Detail = (connection, id, result) => {
+    const query = 'SELECT * FROM subjects WHERE id = ?'
+    connection.query(query, id,  (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);
@@ -23,9 +23,9 @@ var Detail = (connection, id, result) => {
     });
 }
 
-var Create = (connection, subject, result) => {
-    var query = 'INSERT INTO subjects (name, description) VALUES(?,?)'
-    connection.query(query, [subject.name, subject.description], function (error, rows, fields) {
+const Create = (connection, subject, result) => {
+    const query = 'INSERT INTO subjects (name, description) VALUES(?,?)'
+    connection.query(query, [subject.name, subject.description],  (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);
@@ -35,9 +35,9 @@ var Create = (connection, subject, result) => {
     });
 }
 
-var Update = (connection, subject, id, result) => {
-    var query = 'UPDATE subjects SET name = ?, description = ? WHERE id = ?'
-    connection.query(query, [subject.name, subject.description, id], function (error, rows, fields) {
+const Update = (connection, subject, id, result) => {
+    const query = 'UPDATE subjects SET name = ?, description = ? WHERE id = ?'
+    connection.query(query, [subject.name, subject.description, id],  (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);
@@ -48,9 +48,9 @@ var Update = (connection, subject, id, result) => {
 }
 
 
-var Delete = (connection, id, result) => {
-    var query = 'DELETE FROM subjects WHERE id = ?'
-    connection.query(query, id, function (error, rows, fields) {
+const Delete = (connection, id, result) => {
+    const query = 'DELETE FROM subjects WHERE id = ?'
+    connection.query(query, id,  (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);

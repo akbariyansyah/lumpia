@@ -15,7 +15,7 @@ const ListController =  (req, res) => {
 }
 
 const DetailController = (req, res) => {
-    var id = req.params.id
+    const id = req.params.id
     subjectRepo.Detail(connection, id, (data, err) => {
         if (err)
             res.status(500).send({
@@ -30,7 +30,7 @@ const DetailController = (req, res) => {
 }
 
 const CreateController =  (req, res) => {
-    var student = req.body;
+    const student = req.body;
     subjectRepo.Create(connection, student, (data, err) => {
         if (err)
             res.status(500).send({
@@ -45,8 +45,8 @@ const CreateController =  (req, res) => {
 }
 
 const UpdateController =  (req, res) => {
-    var subject = req.body;
-    var id = req.params.id;
+    const subject = req.body;
+    const id = req.params.id;
     subjectRepo.Update(connection, subject, id, (data, err) => {
         if (err)
             res.status(500).send({
@@ -61,7 +61,7 @@ const UpdateController =  (req, res) => {
 }
 
 const DeleteController =  (req, res) => {
-    var id = req.params.id;
+    const id = req.params.id;
     subjectRepo.Delete(connection, id, (data, err) => {
         if (err)
             res.status(500).send({

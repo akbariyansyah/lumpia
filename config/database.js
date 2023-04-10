@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-var Connect = (config) => {
+let Connect = (config) => {
     connection = mysql.createConnection({
         host: config.database.host,
         user: config.database.username,
