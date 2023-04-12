@@ -59,6 +59,14 @@ StudentRoutes.StudentRoutes(app)
 // Subjects . 
 SubjectRoutes.SubjectRoutes(app)
 
+app.get("/ping", (req, res) => {
+    res.send({
+        "appVersion": "1.0.0",
+        "appName": "Lumpia",
+        "env": "local"
+    });
+})
+
 const port = config.app.port
 app.listen(port, function () {
     console.log('app listening on port: ' + port);

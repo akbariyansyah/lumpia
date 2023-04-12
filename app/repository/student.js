@@ -23,7 +23,6 @@ const Detail = (connection, id, result) => {
 }
 
 const Create = (connection, student, result) => {
-    console.log(student)
     const query = 'INSERT INTO students (first_name,last_name, phone, email) VALUES(?,?,?,?)'
     connection.query(query, [student.first_name, student.last_name, student.phone, student.email],  (error, rows, fields) => {
         if (error) {

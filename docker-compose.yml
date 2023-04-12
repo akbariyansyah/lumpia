@@ -1,0 +1,35 @@
+
+version: "3.7"
+services:
+  db:
+    build: ./migration
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: university
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    networks: 
+    - backend
+    healthcheck:
+      test: "exit 0"
+
+  web:
+    build: .
+    environment:
+      MYSQL_DATABASE: university
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_HOST: backend
+    ports:
+      - "3000:3000"
+      # - "127.0.0.1:3306:3306" 
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    networks: 
+    - backend
+
+networks:
+  backend:
+    driver: bridge
