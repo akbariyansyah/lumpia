@@ -23,8 +23,9 @@ const Detail = (connection, id, result) => {
 }
 
 const Create = (connection, student, result) => {
+    console.log(student)
     const query = 'INSERT INTO students (first_name,last_name, phone, email) VALUES(?,?,?,?)'
-    connection.query(query, [student.firstName, student.lastName, student.phone, student.Email],  (error, rows, fields) => {
+    connection.query(query, [student.first_name, student.last_name, student.phone, student.email],  (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);
@@ -36,7 +37,7 @@ const Create = (connection, student, result) => {
 
 const Update = (connection, student, id, result) => {
     const query = 'UPDATE students SET first_name = ?, last_name = ?, phone = ?, email = ? WHERE id = ?'
-    connection.query(query, [student.firstName, student.lastName, student.phone, student.Email, id], (error, rows, fields) => {
+    connection.query(query, [student.first_name, student.last_name, student.phone, student.email, id], (error, rows, fields) => {
         if (error) {
             console.log("error ocurred", error);
             result(null, error);

@@ -1,16 +1,16 @@
-var express = require('express');
-var configReader = require('node-yaml-config');
-var bodyParser = require('body-parser');
-var database = require('./config/database');
-var studentController = require('./app/controller/student.js');
-var subjectController = require('./app/controller/subject.js');
+const express = require('express');
+const configReader = require('node-yaml-config');
+const bodyParser = require('body-parser');
+const database = require('./config/database');
+const StudentRoutes = require('./app/routes/student.js')
+const SubjectRoutes = require('./app/routes/subject.js');
 const fs = require("fs");
 
-var config = configReader.load('config/config.yml');
+const config = configReader.load('config/config.yml');
 
 connection = database.Connect(config)
 
-var app = express();
+const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -54,29 +54,12 @@ let demoLogger = (req, res, next) => { //middleware function
 app.use(demoLogger)
 
 // Students . 
-app.get('/students', studentController.ListController);
-
-app.get('/students/:id', studentController.DetailController);
-
-app.post('/students', studentController.CreateController);
-
-app.put('/students/:id', studentController.UpdateController);
-
-app.delete('/students/:id', studentController.DeleteController);
+StudentRoutes.StudentRoutes(app)
 
 // Subjects . 
-app.get('/subjects', subjectController.ListController);
+SubjectRoutes.SubjectRoutes(app)
 
-app.get('/subjects/:id', subjectController.DetailController);
-
-app.post('/subjects', subjectController.CreateController);
-
-app.put('/subjects/:id', subjectController.UpdateController);
-
-app.delete('/subjects/:id', subjectController.DeleteController);
-
-
-let port = config.app.port
+const port = config.app.port
 app.listen(port, function () {
     console.log('app listening on port: ' + port);
     console.log(getServiceName());
