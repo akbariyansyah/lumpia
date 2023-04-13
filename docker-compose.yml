@@ -7,8 +7,6 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: university
     restart: 'always'
-    ports:
-      - "3306:3306"
     networks: 
     - backend
     healthcheck:
@@ -16,13 +14,8 @@ services:
 
   web:
     build: .
-    environment:
-      MYSQL_DATABASE: university
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_HOST: backend
     ports:
       - "3000:3000"
-      # - "127.0.0.1:3306:3306" 
     depends_on:
       db:
         condition: service_healthy
@@ -33,3 +26,4 @@ services:
 networks:
   backend:
     driver: bridge
+    name: backend

@@ -4,4 +4,6 @@ COPY ./student.sql /docker-entrypoint-initdb.d/
 
 COPY ./subject.sql /docker-entrypoint-initdb.d/
 
+COPY ./flush_previllage.sql /docker-entrypoint-initdb.d/
+
 EXPOSE 3306
