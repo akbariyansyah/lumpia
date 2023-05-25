@@ -48,10 +48,23 @@ let demoLogger = (req, res, next) => { //middleware function
             console.log(err);
         }
     });
-    next();
+    return next();
 };
 
+let basicAuthMiddleware = (req, res, next) => {
+    let username = req.get("username")
+    let password = req.get("password")
+
+    if (username === "admin" && password === "secret") {
+       return next()
+    }
+
+    return res.status(401).send('Authentication required.');
+
+}
+
 app.use(demoLogger)
+app.use(basicAuthMiddleware)
 
 // Students . 
 StudentRoutes.StudentRoutes(app)
