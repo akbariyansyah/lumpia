@@ -2,7 +2,7 @@ default:
   app:
     version: 1 
     environment: "local" # local, development, staging, production
-    port: 3000
+    port: 3001
   database: 
     host: localhost
     username: root  
